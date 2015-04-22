@@ -1,3 +1,5 @@
+execute_process(COMMAND python-config --libs OUTPUT_VARIABLE PYTHON_LDFLAGS OUTPUT_STRIP_TRAILING_WHITESPACE)
+
 add_library(boost_numpy ${LIBRARY_TYPE}
   # header files
   ../../../boost/numpy/dtype.hpp
@@ -17,7 +19,7 @@ add_library(boost_numpy ${LIBRARY_TYPE}
   ufunc.cpp
   numpy.cpp
 )
-target_link_libraries(boost_numpy ${Boost_LIBRARIES} ${PYTHON_LIBRARIES})
+target_link_libraries(boost_numpy ${Boost_LIBRARIES} ${PYTHON_LIBRARIES} ${PYTHON_LDFLAGS})
 
 install(TARGETS boost_numpy 
   ARCHIVE DESTINATION lib 
